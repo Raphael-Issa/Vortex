@@ -33,6 +33,7 @@ export function Catalogos() {
               value={busca}
               onChange={handleBuscaChange}
               className="search-input"
+              aria-label="Buscar mangá por título"
               style={{ margin: 0 }}
             />
           </div>

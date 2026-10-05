@@ -21,7 +21,7 @@ export function Saiba() {
           </p>
 
           <h2 style={{ color: 'var(--accent-primary)', marginTop: '2rem', marginBottom: '1rem', fontSize: '1.4rem' }}>
-            🛠️ Arquitetura e Integração
+            🛣️ Arquitetura e Integração
           </h2>
           <p style={{ marginBottom: '1rem', color: 'var(--text-muted)' }}>
             A aplicação consome a API pública do <strong>MangaDex</strong> para buscar as informações em tempo real. Toda a lógica de estados, paginação e buscas dinâmicas é gerenciada por <em>Custom Hooks</em> em React, mantendo a interface leve e dividida em componentes independentes.
@@ -35,7 +35,7 @@ export function Saiba() {
           </p>
 
           <h2 style={{ color: 'var(--accent-primary)', marginTop: '2rem', marginBottom: '1rem', fontSize: '1.4rem' }}>
-            ⚠️ Limitações de API e Distribuição
+            🛑 Limitações de API e Distribuição
           </h2>
           <p style={{ marginBottom: '1rem', color: 'var(--text-muted)' }}>
             Este projeto <strong>não será publicado comercialmente nem disponibilizado em lojas de aplicativos</strong> (como a Play Store). Existem alguns motivos principais para isso:

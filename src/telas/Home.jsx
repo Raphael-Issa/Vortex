@@ -1,11 +1,9 @@
 import { Link } from 'react-router-dom';
 import { Navbar } from '../componentes/Navbar';
-// 1. Alterado para importar o hook de destaque!
 import { useMangaDestaque } from '../hooks/useMangaDestaque'; 
 import '../App.css';
 
 export function Home() {
-  // 2. Chamada atualizada para usar o useMangaDestaque
   const { mangaDestaque, titulo, urlDaFoto, loading } = useMangaDestaque();
 
   if (loading) return <h2 className='carregando'>Carregando mangá...</h2>;
@@ -13,14 +11,12 @@ export function Home() {
 
   return (
     <div className="home-container">
-      {/* 1. Navbar */}
       <Navbar 
         home="Home"
         cat="Catálogos"
         sobre="Saiba Mais"
       />
 
-      {/* 2. Banner Principal (HERO) */}
       <main className="hero-banner">
         <div 
           className="hero-background" 
@@ -48,7 +44,6 @@ export function Home() {
         </div>
       </main>
 
-      {/* 3. Rodapé */}
       <footer className="footer">
         <p>VORTEX MANGÁS © 2026 - Dados e capas fornecidos por MangaDex. Projeto não comercial.</p>
       </footer>

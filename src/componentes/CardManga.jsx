@@ -28,9 +28,10 @@ export function CardManga({ manga }) {
 
   const caparel = manga?.relationships?.find(r => r.type === 'cover_art');
   const nomeArquivo = caparel?.attributes?.fileName;
+  // Usar qualidade .256.jpg para covers na listagem poupa muita banda (recomendação do MangaDex)
   const urlCapa = nomeArquivo 
-    ? `https://uploads.mangadex.org/covers/${manga.id}/${nomeArquivo}`
-    : "https://via.placeholder.com/200x300?text=Sem+Capa";
+    ? `https://uploads.mangadex.org/covers/${manga.id}/${nomeArquivo}.256.jpg`
+    : "https://via.placeholder.com/256x384?text=Sem+Capa";
 
   const ano = attributes?.year || 'N/D';
   
@@ -56,7 +57,14 @@ export function CardManga({ manga }) {
     <Link to={`/manga/${manga.id}`} style={{ textDecoration: 'none' }}>
       <div className="manga-card">
         <div className="manga-card-image-container">
-          <img src={urlCapa} alt={titulo} className="manga-card-img" />
+          <img 
+            src={urlCapa} 
+            alt={titulo} 
+            className="manga-card-img" 
+            loading="lazy" 
+            width="256" 
+            height="384" 
+          />
           <div className="manga-card-badge" style={{ color: statusInfo.color, borderColor: statusInfo.color }}>
             {statusInfo.text}
           </div>

@@ -36,8 +36,9 @@ export function useMangaDestaque() {
 
   const nomeArquivo = caparel?.attributes?.fileName;
 
+  // Utilizando uma resolução otimizada (.512.jpg) para o banner para salvar banda e melhorar a performance (LCP)
   const urlDaFoto = (mangaDestaque && nomeArquivo)
-    ? `https://uploads.mangadex.org/covers/${mangaDestaque.id}/${nomeArquivo}`
+    ? `https://uploads.mangadex.org/covers/${mangaDestaque.id}/${nomeArquivo}.512.jpg`
     : "https://via.placeholder.com/1200x600?text=Sem+Capa";
 
   return {
