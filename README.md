@@ -105,3 +105,8 @@ npx cap sync
 # 7. Abra o projeto nativo no Android Studio para rodar em um emulador ou dispositivo fÃ­sico
 npx cap open android
 ```
+
+## ?? Suporte a Android Nativo
+- **App Icon e Splash Screen:** Ícones exclusivos gerados pelo @capacitor/assets.
+- **Botão de Voltar Nativo:** Integração com @capacitor/app para capturar e gerenciar a navegação ao clicar no botão físico de voltar do smartphone, permitindo a navegação interna ou a saída do app de forma suave.
+

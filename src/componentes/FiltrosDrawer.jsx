@@ -30,7 +30,7 @@ export function FiltrosDrawer({
       <div className={`filters-drawer ${isDrawerOpen ? 'open' : ''}`}>
         <div className="drawer-header">
           <h2>Filtros</h2>
-          <button className="close-drawer-btn" onClick={() => setIsDrawerOpen(false)}>✖</button>
+          <button className="close-drawer-btn" onClick={() => setIsDrawerOpen(false)}>✕</button>
         </div>
 
         <div className="filter-group">
@@ -62,7 +62,7 @@ export function FiltrosDrawer({
                 checked={selectedStatus.includes(st)} 
                 onChange={() => toggleStatus(st)} 
               />
-              {st.charAt(0).toUpperCase() + st.slice(1)}
+              {{ ongoing: 'Lançando', completed: 'Concluído', hiatus: 'Em Hiato', cancelled: 'Cancelado' }[st]}
             </label>
           ))}
         </div>
