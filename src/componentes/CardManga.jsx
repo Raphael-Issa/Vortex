@@ -57,7 +57,7 @@ export function CardManga({ manga }) {
       <div className="manga-card">
         <div className="manga-card-image-container">
           <img src={urlCapa} alt={titulo} className="manga-card-img" />
-          <div className="manga-card-badge" style={{ backgroundColor: statusInfo.color }}>
+          <div className="manga-card-badge" style={{ color: statusInfo.color, borderColor: statusInfo.color }}>
             {statusInfo.text}
           </div>
         </div>
