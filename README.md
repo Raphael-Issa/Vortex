@@ -1,4 +1,4 @@
-# 🌪️ Vortex Mangás
+# 📖 Vortex Mangás
 
 O **Vortex Mangás** é uma Single Page Application (SPA) moderna para exploração e consulta de catálogos de mangás. O projeto consome a API do MangaDex, oferecendo busca em tempo real, navegação dinâmica, paginação sincronizada na URL e suporte para compilação nativa em Android.
 
@@ -16,7 +16,7 @@ O projeto foca em uma interface de usuário impecável, com temas cyberpunk/neon
 
 ---
 
-## ⭐ Principais Funcionalidades
+## 🌟 Principais Funcionalidades
 
 - **Navegação SPA:** Transições de tela fluidas e sem recarregamento de página.
 - **Destaques e Populares:** Exibição dos 100 mangás mais seguidos na Home e banner com obra em destaque.
@@ -32,7 +32,7 @@ O projeto foca em uma interface de usuário impecável, com temas cyberpunk/neon
 
 ---
 
-## 📂 Arquitetura e Estrutura do Projeto
+## 🏗️ Arquitetura e Estrutura do Projeto
 
 ### 🛣️ Roteamento (`src/App.jsx`)
 A aplicação utiliza o `BrowserRouter` com as seguintes rotas mapeadas:
@@ -46,7 +46,7 @@ A aplicação utiliza o `BrowserRouter` com as seguintes rotas mapeadas:
 
 ---
 
-### 🎣 Hooks Customizados (`src/hooks/`)
+### 🧩 Hooks Customizados (`src/hooks/`)
 A lógica de negócios e as requisições estão segregadas em hooks especializados (Clean Code):
 
 - `usePopularMangas.js`: Busca e gerencia a lista dos mangás mais populares (ocultando conteúdo sensível por padrão).
@@ -58,7 +58,7 @@ A lógica de negócios e as requisições estão segregadas em hooks especializa
 
 ---
 
-### 🧩 Componentização (`src/componentes/`)
+### 🧱 Componentização (`src/componentes/`)
 - Componentes visuais como `Navbar`, `CardManga`, e o painel `FiltrosDrawer` isolam completamente o layout da lógica de negócio.
 
 ---
@@ -69,7 +69,7 @@ A lógica de negócios e as requisições estão segregadas em hooks especializa
 
 ---
 
-## 🛠️ Como Executar o Projeto
+## 🏃 Como Executar o Projeto
 
 ### Pré-requisitos
 - **Recomendação: Node.js** (versão 18 ou superior)
@@ -106,7 +106,6 @@ npx cap sync
 npx cap open android
 ```
 
-## ?? Suporte a Android Nativo
-- **App Icon e Splash Screen:** �cones exclusivos gerados pelo @capacitor/assets.
-- **Bot�o de Voltar Nativo:** Integra��o com @capacitor/app para capturar e gerenciar a navega��o ao clicar no bot�o f�sico de voltar do smartphone, permitindo a navega��o interna ou a sa�da do app de forma suave.
-
+## 📱 Suporte a Android Nativo
+- **App Icon e Splash Screen:** Ícones exclusivos gerados pelo @capacitor/assets.
+- **Botão de Voltar Nativo:** Integração com @capacitor/app para capturar e gerenciar a navegação ao clicar no botão físico de voltar do smartphone, permitindo a navegação interna ou a saída do app de forma suave.
