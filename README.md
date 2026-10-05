@@ -1,6 +1,8 @@
-# 🌀 Vortex Mangás
+# 🌪️ Vortex Mangás
 
 O **Vortex Mangás** é uma Single Page Application (SPA) moderna para exploração e consulta de catálogos de mangás. O projeto consome a API do MangaDex, oferecendo busca em tempo real, navegação dinâmica, paginação sincronizada na URL e suporte para compilação nativa em Android.
+
+O projeto foca em uma interface de usuário impecável, com temas cyberpunk/neon, garantindo uma excelente experiência tanto em desktops quanto em dispositivos móveis (com Bottom Sheets interativos).
 
 ---
 
@@ -10,22 +12,27 @@ O **Vortex Mangás** é uma Single Page Application (SPA) moderna para exploraç
 - **[React Router DOM](https://reactrouter.com/)** (Roteamento SPA)
 - **[Capacitor](https://capacitorjs.com/)** (Empacotamento Nativo Android)
 - **[MangaDex API](https://api.mangadex.org/)** (Fonte de dados do catálogo)
-- **CSS3** (Estilização responsiva e tema customizado)
+- **CSS3** (Estilização responsiva, Glassmorphism e tema customizado Neon)
 
 ---
 
-## 📌 Principais Funcionalidades
+## ⭐ Principais Funcionalidades
 
 - **Navegação SPA:** Transições de tela fluidas e sem recarregamento de página.
 - **Destaques e Populares:** Exibição dos 100 mangás mais seguidos na Home e banner com obra em destaque.
-- **Catálogo Dinâmico:** Busca por texto e paginação.
-- **Parâmetros na URL:** Estado da busca e página atual persistem na URL (`/catalogos?busca=one%20piece&pagina=2`), permitindo compartilhamento de links diretos.
+- **Catálogo Dinâmico Avançado:** 
+  - Busca por texto com priorização de resultados.
+  - Filtros Completos encapsulados em um componente Drawer/Bottom Sheet.
+  - Filtro explícito +18 seguro por padrão.
+  - Filtragem múltipla por Gêneros, Temas, Formatos, Status e Demografia.
+  - Opções de ordenação personalizadas e filtro por Ano.
+- **Parâmetros na URL:** Estado da busca, página atual e todos os filtros ativos persistem na URL, permitindo compartilhamento de links diretos.
 - **Detalhes da Obra:** Rota dinâmica (`/manga/:id`) com sinopse, capa, informações detalhadas e histórico de navegação nativo do navegador.
-- **Suporte Mobile:** Configurado via Capacitor para execução nativa em dispositivos Android.
+- **Suporte Mobile:** Configurado via Capacitor para execução nativa em dispositivos Android, com UI responsiva amigável a toque (Bottom Sheet para filtros).
 
 ---
 
-## 🏗️ Arquitetura e Estrutura do Projeto
+## 📂 Arquitetura e Estrutura do Projeto
 
 ### 🛣️ Roteamento (`src/App.jsx`)
 A aplicação utiliza o `BrowserRouter` com as seguintes rotas mapeadas:
@@ -33,30 +40,36 @@ A aplicação utiliza o `BrowserRouter` com as seguintes rotas mapeadas:
 | Rota | Tela | Descrição |
 | :--- | :--- | :--- |
 | `/` | `Home` | Página inicial com destaques e obras populares |
-| `/catalogos` | `Catalogos` | Busca geral de mangás e paginação |
+| `/catalogos` | `Catalogos` | Busca geral de mangás e painel de filtros |
 | `/saiba` | `Saiba` | Informações sobre a plataforma |
 | `/manga/:id` | `DetalhesManga` | Informações detalhadas de um mangá específico (via UUID) |
 
 ---
 
 ### 🎣 Hooks Customizados (`src/hooks/`)
-A lógica de negócios e as requisições estão segregadas em hooks especializados:
+A lógica de negócios e as requisições estão segregadas em hooks especializados (Clean Code):
 
-- `usePopularMangas.js`: Busca e gerencia a lista dos mangás mais populares.
+- `usePopularMangas.js`: Busca e gerencia a lista dos mangás mais populares (ocultando conteúdo sensível por padrão).
 - `useMangaDestaque.js`: Processa o primeiro item da lista popular para exibição no banner principal.
-- `useMangaSearch.js`: Gerencia a busca por texto, números de páginas e estados de carregamento.
+- `useMangaSearch.js`: Gerencia a busca integrando todos os parâmetros de texto, tags, paginação e ordenação na API.
+- `useMangaTags.js`: Busca os gêneros/temas da API dinamicamente e os separa por categorias lógicas.
 - `useMangaDetails.js`: Consome os dados específicos de uma obra a partir do UUID da URL.
-- `useCatalogParams.js`: Sincroniza os parâmetros de consulta (`busca`, `pagina`) com a URL e trata o rolamento suave (*scroll*) ao trocar de página.
+- `useCatalogParams.js`: Sincroniza todos os parâmetros de consulta e filtros com a URL via `SearchParams`.
+
+---
+
+### 🧩 Componentização (`src/componentes/`)
+- Componentes visuais como `Navbar`, `CardManga`, e o painel `FiltrosDrawer` isolam completamente o layout da lógica de negócio.
 
 ---
 
 ### 🎨 Design e Estilização
 - `src/index.css`: Reset global de CSS e estilos base.
-- `src/App.css`: Definição do tema escuro (fundo escuro, cards azulados e acentos em cor ciano), gerenciamento da grade responsiva e adaptação para dispositivos móveis.
+- `src/App.css`: Definição do tema escuro (fundo escuro, cards azulados e acentos em cor ciano), gerenciamento da grade responsiva e adaptação para dispositivos móveis com componentes complexos como Toggles e Drawers.
 
 ---
 
-## 💻 Como Executar o Projeto
+## 🛠️ Como Executar o Projeto
 
 ### Pré-requisitos
 - **Recomendação: Node.js** (versão 18 ou superior)
@@ -67,10 +80,10 @@ A lógica de negócios e as requisições estão segregadas em hooks especializa
 
 ```bash
 # 1. Clone o repositório
-git clone [https://github.com/SEU-USUARIO/vortex-mangas.git](https://github.com/SEU-USUARIO/vortex-mangas.git)
+git clone https://github.com/SEU-USUARIO/Vortex.git
 
 # 2. Acesse a pasta do projeto
-cd vortex-mangas
+cd Vortex
 
 # 3. Instale as dependências
 npm install
@@ -91,3 +104,4 @@ npx cap sync
 
 # 7. Abra o projeto nativo no Android Studio para rodar em um emulador ou dispositivo físico
 npx cap open android
+```
