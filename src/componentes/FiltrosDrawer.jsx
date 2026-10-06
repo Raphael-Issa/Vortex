@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useMangaTags } from '../hooks/useMangaTags';
 
 export function FiltrosDrawer({
@@ -17,6 +18,45 @@ export function FiltrosDrawer({
   toggleTag
 }) {
   const { tagsByGroup, loadingTags } = useMangaTags();
+  const [touchStartY, setTouchStartY] = useState(null);
+
+  const handleApply = () => {
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+    setIsDrawerOpen(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      // Apenas tira o foco do input para descer o teclado no Android
+      e.target.blur();
+    }
+  };
+
+  const onTouchStart = (e) => {
+    // Só inicia o gesto de arrastar para baixo se o scroll estiver no topo
+    if (e.currentTarget.scrollTop === 0) {
+      setTouchStartY(e.touches[0].clientY);
+    }
+  };
+
+  const onTouchMove = (e) => {
+    if (touchStartY === null) return;
+    const currentY = e.touches[0].clientY;
+    const diffY = currentY - touchStartY;
+
+    // Se arrastou mais de 60px para baixo, fecha o drawer
+    if (diffY > 60) {
+      setIsDrawerOpen(false);
+      setTouchStartY(null);
+    }
+  };
+
+  const onTouchEnd = () => {
+    setTouchStartY(null);
+  };
 
   return (
     <>
@@ -27,7 +67,13 @@ export function FiltrosDrawer({
       ></div>
       
       {/* Filters Drawer */}
-      <div className={`filters-drawer ${isDrawerOpen ? 'open' : ''}`}>
+      <div 
+        className={`filters-drawer ${isDrawerOpen ? 'open' : ''}`}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
+        <div className="drawer-drag-indicator"></div>
         <div className="drawer-header">
           <h2>Filtros</h2>
           <button className="close-drawer-btn" aria-label="Fechar Filtros" onClick={() => setIsDrawerOpen(false)}>×</button>
@@ -96,6 +142,7 @@ export function FiltrosDrawer({
             placeholder="Ex: 2023" 
             value={year}
             onChange={(e) => setYear(e.target.value)}
+            onKeyDown={handleKeyDown}
             aria-label="Filtrar por ano de lançamento"
           />
         </div>
@@ -152,6 +199,13 @@ export function FiltrosDrawer({
               ))}
             </div>
           )}
+        </div>
+
+        {/* Floating Apply Button */}
+        <div className="floating-apply-btn-wrapper">
+          <button className="floating-apply-btn" onClick={handleApply}>
+            Aplicar Filtros
+          </button>
         </div>
       </div>
     </>
